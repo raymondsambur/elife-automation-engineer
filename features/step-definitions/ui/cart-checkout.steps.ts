@@ -56,7 +56,7 @@ When("I remove {string} from the cart page", async function (this: PlaywrightWor
 });
 
 When("I sort products by {string}", async function (this: PlaywrightWorld, label: string) {
-  const option = sortOptions[label];
+  const option = sortOptions[label] as "lohi" | "hilo" | "az" | "za";
   await this.ui.inventoryPage.sortBy(option);
 });
 
