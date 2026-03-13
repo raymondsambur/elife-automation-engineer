@@ -20,13 +20,6 @@ When(
   }
 );
 
-Given(
-  "I log in with username {string} and password {string}",
-  async function (this: PlaywrightWorld, username: string, password: string) {
-    await this.ui.loginPage.login(username, password);
-  }
-);
-
 Then("I should be on the inventory page", async function (this: PlaywrightWorld) {
   await this.ui.inventoryPage.expectLoaded();
 });

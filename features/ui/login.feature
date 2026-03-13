@@ -27,7 +27,7 @@ Feature: Login Flow
     Then I should see the error "Username and password do not match any user in this service"
 
   Scenario: Error message can be dismissed
-    Given I log in with username "" and password ""
+    When I log in with username "" and password ""
     And I should see the error "Username is required"
     When I dismiss the error message
     Then I should not see an error message
