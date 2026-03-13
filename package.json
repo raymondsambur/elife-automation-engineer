@@ -1,0 +1,27 @@
+{
+  "name": "elife-automation-engineer",
+  "version": "1.0.0",
+  "description": "Test automation framework using Playwright for UI (SauceDemo) and API (Restful-Booker) testing",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --project=ui-tests",
+    "test:api": "npx playwright test --project=api-tests",
+    "test:headed": "npx playwright test --project=ui-tests --headed",
+    "test:debug": "npx playwright test --debug",
+    "report": "npx playwright show-report",
+    "test:cucumber": "cucumber-js",
+    "test:cucumber:ui": "cucumber-js --profile ui",
+    "test:cucumber:api": "cucumber-js --profile api"
+  },
+  "keywords": ["playwright", "testing", "automation", "e2e", "api-testing", "cucumber", "bdd"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.3.0",
+    "@cucumber/html-formatter": "^21.7.0",
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
