@@ -26,4 +26,12 @@ module.exports = {
     "--require features/step-definitions/api/**/*.ts",
     "--format progress",
   ].join(" "),
+  smoke: [
+    "features/**/*.feature",
+    "--tags @smoke",
+    "--require-module ts-node/register",
+    "--require features/support/**/*.ts",
+    "--require features/step-definitions/**/*.ts",
+    "--format progress",
+  ].join(" "),
 };
