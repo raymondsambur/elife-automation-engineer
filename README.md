@@ -160,11 +160,10 @@ The `features/` directory mirrors the Playwright specs in human-readable Gherkin
 
 ### Why Playwright?
 
-Playwright was chosen over Cypress for three specific reasons relevant to this task:
+Playwright was chosen over Cypress for two specific reasons relevant to this task:
 
-1. **Native API testing** — Playwright's `APIRequestContext` lets the same framework test both UI and API without a separate tool. Cypress requires plugins for anything beyond simple `cy.request` calls.
-2. **Multi-project configuration** — `playwright.config.ts` defines separate `ui-tests` and `api-tests` projects with different base URLs, headers, and retry strategies. There's no equivalent first-class concept in Cypress.
-3. **TypeScript without ceremony** — Playwright ships with full first-party TypeScript support. No additional type definitions or `ts-jest` bridge needed.
+1. **Native API testing** — Playwright's `APIRequestContext` lets the same framework test both UI and API without a separate tool.
+2. **Multi-project configuration** — `playwright.config.ts` defines separate `ui-tests` and `api-tests` projects with different base URLs, headers, and retry strategies.
 
 ### Page Object Model (POM)
 
@@ -198,21 +197,13 @@ The `postman-collection/` directory contains a portable [Postman](https://www.po
 
 SauceDemo's `problem_user` account renders broken product images and misaligned layouts that the current functional tests miss. Adding Playwright's built-in screenshot comparison (`expect(page).toHaveScreenshot()`) would catch CSS regressions and rendering bugs. This is the category of bug most likely to slip through a functional-only suite.
 
-**2. `problem_user` Behavioral Coverage** *(~45 min)*
-
-The `problem_user` account is already in `src/data/test-data.ts` but unused in specs. This account exhibits broken sort buttons, wrong images, and a checkout that fails silently. These are real regression risks that should be documented as tests — even if they're currently expected to fail (skipped with `test.fail()`).
-
-**3. Restful-Booker Negative Validation Matrix** *(~45 min)*
-
-The API currently has no input validation. Creating a parametrized test that sends invalid combinations (string where integer expected, past checkout dates, checkout before checkin) would prove the API's boundaries and serve as a regression net if validation is ever added.
-
-**4. Cross-Browser Expansion** *(~30 min)*
+**2. Cross-Browser Expansion** *(~30 min)*
 
 Adding Firefox and WebKit projects to `playwright.config.ts` costs almost no code but gives meaningful cross-browser signal. The CI pipeline already supports multiple browser installs.
 
-**5. API Contract Testing** *(~30 min)*
+**3. Auto Passed result in Notion** *(~1 hr)*
 
-Using a tool like Pact or a simple JSON Schema validator, assert the API response shapes match a contract. This would catch breaking changes to the booking payload structure before UI code or consumers are affected.
+Create a script that will automatically update the Notion database with the test results.
 
 ---
 
@@ -265,7 +256,7 @@ Using a tool like Pact or a simple JSON Schema validator, assert the API respons
 | **Summary** | `DELETE /booking/:id` responds with 201 Created |
 | **Application** | Restful-Booker API |
 | **Environment** | `https://restful-booker.herokuapp.com` |
-| **Severity** | Medium |
+| **Severity** | Low |
 
 **Steps to reproduce:**
 1. Create a booking via `POST /booking`, note the `bookingid`
@@ -298,27 +289,7 @@ Using a tool like Pact or a simple JSON Schema validator, assert the API respons
 
 ---
 
-### Bug 5 — Unauthenticated mutation returns 403 instead of 401
-
-| Field | Detail |
-|-------|--------|
-| **Summary** | `PUT /booking/:id` without credentials returns 403 Forbidden |
-| **Application** | Restful-Booker API |
-| **Environment** | `https://restful-booker.herokuapp.com` |
-| **Severity** | Low |
-
-**Steps to reproduce:**
-1. Create a booking, note the `bookingid`
-2. `PUT https://restful-booker.herokuapp.com/booking/{bookingid}` with no `Authorization` or `Cookie` header
-
-**Expected:** `401 Unauthorized` (no identity presented)
-**Actual:** `403 Forbidden`
-
-**Impact:** 403 means "identified but not permitted." Without credentials, the server cannot know who is making the request, so 401 is semantically correct. This misleads clients implementing retry/redirect logic.
-
----
-
-### Bug 6 — 404 response body is plain text, not JSON
+### Bug 5 — 404 response body is plain text, not JSON
 
 | Field | Detail |
 |-------|--------|
@@ -368,10 +339,3 @@ api-tests ──────┬──► ui-tests
 ```
 
 API tests run first as a fast smoke gate. UI and Cucumber jobs run in parallel once the API gate passes.
-
-**Artifacts produced:**
-| Artifact | Retention |
-|----------|-----------|
-| Playwright HTML report (UI + API) | 14 days |
-| Cucumber HTML report | 14 days |
-| Screenshots, traces, videos (on failure) | 7 days |
