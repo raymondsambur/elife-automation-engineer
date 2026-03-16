@@ -11,9 +11,18 @@
     "report": "npx playwright show-report",
     "test:cucumber": "cucumber-js",
     "test:cucumber:ui": "cucumber-js --profile ui",
-    "test:cucumber:api": "cucumber-js --profile api"
+    "test:cucumber:api": "cucumber-js --profile api",
+    "test:cucumber:smoke": "cucumber-js --profile smoke"
   },
-  "keywords": ["playwright", "testing", "automation", "e2e", "api-testing", "cucumber", "bdd"],
+  "keywords": [
+    "playwright",
+    "testing",
+    "automation",
+    "e2e",
+    "api-testing",
+    "cucumber",
+    "bdd"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
