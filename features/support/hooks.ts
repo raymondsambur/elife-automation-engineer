@@ -1,5 +1,8 @@
-import { Before, After } from "@cucumber/cucumber";
+import { Before, After, setDefaultTimeout } from "@cucumber/cucumber";
 import { PlaywrightWorld } from "./world";
+
+// Set global step timeout load (e.g., 60 seconds)
+setDefaultTimeout(60 * 1000);
 
 /**
  * Universal hooks — open and close both browser and API contexts for
