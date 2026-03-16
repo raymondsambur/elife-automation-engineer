@@ -3,6 +3,7 @@ Feature: Authentication — Restful-Booker API
   I want to obtain an auth token
   So that I can perform protected CRUD operations
 
+  @smoke
   Scenario: Obtain a token with valid credentials
     When I request a token with username "admin" and password "password123"
     Then the auth response status should be 200

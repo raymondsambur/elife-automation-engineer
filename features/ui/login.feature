@@ -6,6 +6,7 @@ Feature: Login Flow
   Background:
     Given I am on the SauceDemo login page
 
+  @smoke
   Scenario: Successful login with valid credentials
     When I log in as "standard_user" with password "secret_sauce"
     Then I should be on the inventory page

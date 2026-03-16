@@ -2,9 +2,9 @@ Feature: Booking CRUD — Restful-Booker API
   As an API consumer
   I want to manage hotel bookings
   So that I can create, read, update, and delete bookings
-
   # ─── CREATE ───
 
+  @smoke
   Scenario: Create a new booking with all fields
     When I create a booking with all fields
     Then the create booking response status should be 200
@@ -15,9 +15,9 @@ Feature: Booking CRUD — Restful-Booker API
     When I create a booking without additionalneeds
     Then the create booking response status should be 200
     And the response should have a numeric bookingid
-
   # ─── READ ───
 
+  @smoke
   Scenario: Get a list of all booking IDs
     When I request all bookings
     Then the response status should be 200
@@ -40,7 +40,6 @@ Feature: Booking CRUD — Restful-Booker API
     When I filter bookings by that unique firstname and lastname "TestFilter"
     Then the response status should be 200
     And the response should return at least one result
-
   # ─── UPDATE (Full) ───
 
   Scenario: Fully update a booking with token auth
@@ -60,7 +59,6 @@ Feature: Booking CRUD — Restful-Booker API
     Given a booking exists
     When I PUT update the booking without any authentication
     Then the update response status should be 403
-
   # ─── PARTIAL UPDATE ───
 
   Scenario: Patch only the firstname of a booking
@@ -78,7 +76,6 @@ Feature: Booking CRUD — Restful-Booker API
     Then the patch response status should be 200
     And the booking checkin date should be "2026-01-01"
     And the booking checkout date should be "2026-01-15"
-
   # ─── DELETE ───
 
   Scenario: Delete a booking with token auth
@@ -93,7 +90,6 @@ Feature: Booking CRUD — Restful-Booker API
     Given a booking exists
     When I DELETE the booking without authentication
     Then the delete response status should be 403
-
   # ─── HEALTH CHECK ───
 
   Scenario: Health check endpoint confirms API is up
