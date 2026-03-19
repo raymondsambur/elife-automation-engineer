@@ -4,25 +4,27 @@ Feature: Booking CRUD — Restful-Booker API
   So that I can create, read, update, and delete bookings
   # ─── CREATE ───
 
-  @smoke
+  @smoke @ATC-24
   Scenario: Create a new booking with all fields
     When I create a booking with all fields
     Then the create booking response status should be 200
     And the response should have a numeric bookingid
     And the returned booking data should match what was sent
 
+  @ATC-25
   Scenario: Create a booking without the optional additionalneeds field
     When I create a booking without additionalneeds
     Then the create booking response status should be 200
     And the response should have a numeric bookingid
   # ─── READ ───
 
-  @smoke
+  @smoke @ATC-26
   Scenario: Get a list of all booking IDs
     When I request all bookings
     Then the response status should be 200
     And the response body should be a non-empty array of booking IDs
 
+  @ATC-27
   Scenario: Get a specific booking by ID
     Given a booking exists with firstname "ReadTest" and lastname "User"
     When I request the booking by its ID
@@ -30,11 +32,13 @@ Feature: Booking CRUD — Restful-Booker API
     And the booking firstname should be "ReadTest"
     And the booking lastname should be "User"
 
+  @ATC-28
   Scenario: Request a non-existent booking returns 404
     # BUG: Response body is plain text, not JSON
     When I request booking ID 99999999
     Then the response status should be 404
 
+  @ATC-29
   Scenario: Filter bookings by name
     Given a booking exists with a unique firstname and lastname "TestFilter"
     When I filter bookings by that unique firstname and lastname "TestFilter"
@@ -42,6 +46,7 @@ Feature: Booking CRUD — Restful-Booker API
     And the response should return at least one result
   # ─── UPDATE (Full) ───
 
+  @ATC-30
   Scenario: Fully update a booking with token auth
     Given a booking exists
     And I have a valid auth token
@@ -49,11 +54,13 @@ Feature: Booking CRUD — Restful-Booker API
     Then the update response status should be 200
     And the updated booking fields should reflect the new values
 
+  @ATC-31
   Scenario: Fully update a booking with basic auth
     Given a booking exists
     When I PUT update the booking using basic auth
     Then the update response status should be 200
 
+  @ATC-32
   Scenario: Update without authentication is rejected
     # BUG: Returns 403 Forbidden instead of 401 Unauthorized
     Given a booking exists
@@ -61,6 +68,7 @@ Feature: Booking CRUD — Restful-Booker API
     Then the update response status should be 403
   # ─── PARTIAL UPDATE ───
 
+  @ATC-33
   Scenario: Patch only the firstname of a booking
     Given a booking exists with firstname "Original" and lastname "PartialTest"
     And I have a valid auth token
@@ -69,6 +77,7 @@ Feature: Booking CRUD — Restful-Booker API
     And the booking firstname should be "Patched"
     And the booking lastname should still be "PartialTest"
 
+  @ATC-34
   Scenario: Patch the booking dates of a booking
     Given a booking exists
     And I have a valid auth token
@@ -78,6 +87,7 @@ Feature: Booking CRUD — Restful-Booker API
     And the booking checkout date should be "2026-01-15"
   # ─── DELETE ───
 
+  @ATC-35
   Scenario: Delete a booking with token auth
     # BUG: Returns 201 Created instead of 200/204 for a deletion
     Given a booking exists
@@ -86,12 +96,14 @@ Feature: Booking CRUD — Restful-Booker API
     Then the delete response status should be 201
     And the booking should no longer exist
 
+  @ATC-36
   Scenario: Delete without authentication is rejected
     Given a booking exists
     When I DELETE the booking without authentication
     Then the delete response status should be 403
   # ─── HEALTH CHECK ───
 
+  @ATC-37
   Scenario: Health check endpoint confirms API is up
     # BUG: Returns 201 instead of 200
     When I ping the health check endpoint
