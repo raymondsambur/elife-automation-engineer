@@ -32,5 +32,9 @@
     "@types/node": "^25.5.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@notionhq/client": "^5.13.0",
+    "dotenv": "^17.3.1"
   }
 }
