@@ -92,13 +92,17 @@ jobs:
 
   # ──────────────────────────────────────────────
   # Cucumber BDD Tests — readable scenario layer
-  # Runs after API gate passes; needs browser for UI scenarios
+  # Runs after API gate passes; requires browser matrix
   # ──────────────────────────────────────────────
   cucumber-tests:
-    name: Cucumber BDD Tests
+    name: Cucumber BDD Tests (${{ matrix.browser }})
     runs-on: ubuntu-latest
     needs: api-tests
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
 
     steps:
       - name: Checkout repository
@@ -114,15 +118,15 @@ jobs:
         run: npm ci
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps ${{ matrix.browser }}
 
       - name: Run Cucumber tests
-        run: npm run test:cucumber
+        run: npm run test:cucumber:ui:${{ matrix.browser }}
 
       - name: Upload Cucumber HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cucumber-report
+          name: cucumber-report-${{ matrix.browser }}
           path: cucumber-report/
           retention-days: 14

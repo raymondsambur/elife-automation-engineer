@@ -1,6 +1,9 @@
-import { chromium, Browser, BrowserContext, Page, APIRequestContext, request as pwRequest } from "@playwright/test";
+import { chromium, firefox, webkit, Browser, BrowserContext, Page, APIRequestContext, request as pwRequest } from "@playwright/test";
 import { setWorldConstructor, World, IWorldOptions } from "@cucumber/cucumber";
 import { LoginPage, InventoryPage, CartPage, CheckoutPage } from "../../src/pages";
+
+const BROWSERS = { chromium, firefox, webkit } as const;
+type BrowserName = keyof typeof BROWSERS;
 
 /**
  * Custom Cucumber World that holds Playwright browser, page, and API request
@@ -32,7 +35,14 @@ export class PlaywrightWorld extends World {
   }
 
   async openBrowser(): Promise<void> {
-    this.browser = await chromium.launch({ headless: true });
+    // 1. Check cucumber profile parameters (--world-parameters)
+    // 2. Fallback to env var
+    // 3. Fallback to "chromium"
+    const paramBrowser = this.parameters?.browser as string | undefined;
+    const browserName = (paramBrowser || process.env.BROWSER || "chromium") as BrowserName;
+    const launcher = BROWSERS[browserName] ?? chromium;
+
+    this.browser = await launcher.launch({ headless: true });
     this.context = await this.browser.newContext({
       baseURL: "https://www.saucedemo.com",
     });

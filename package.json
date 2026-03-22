@@ -11,6 +11,9 @@
     "report": "npx playwright show-report",
     "test:cucumber": "cucumber-js",
     "test:cucumber:ui": "cucumber-js --profile ui",
+    "test:cucumber:ui:chromium": "cucumber-js --profile ui:chromium",
+    "test:cucumber:ui:firefox": "cucumber-js --profile ui:firefox",
+    "test:cucumber:ui:webkit": "cucumber-js --profile ui:webkit",
     "test:cucumber:api": "cucumber-js --profile api",
     "test:cucumber:smoke": "cucumber-js --profile smoke"
   },

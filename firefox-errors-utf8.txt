@@ -1,0 +1,120 @@
+﻿
+> elife-automation-engineer@1.0.0 test:cucumber:ui:firefox
+> cucumber-js --profile ui:firefox
+
+[dotenv@17.3.1] injecting env (2) from .env -- tip: ΓÜÖ∩╕Å  suppress all logs with { quiet: true }
+F---.F-----.F-----.F----.F------.F-------.F---.F---.F---.F---.F------.F------.F------.F--------.F---.F---.F---.F---.F---.F-----.[Notion] Updating 20 test result(s)...
+[Notion] ATC-1 ΓåÆ Failed
+[Notion] ATC-2 ΓåÆ Failed
+[Notion] ATC-3 ΓåÆ Failed
+[Notion] ATC-4 ΓåÆ Failed
+[Notion] ATC-5 ΓåÆ Failed
+[Notion] ATC-6 ΓåÆ Failed
+[Notion] ATC-7 ΓåÆ Failed
+[Notion] ATC-8 ΓåÆ Failed
+[Notion] ATC-9 ΓåÆ Failed
+[Notion] ATC-10 ΓåÆ Failed
+node.exe : Error: an 
+AfterAll hook errored, 
+process exiting: featur
+es\support\hooks.ts:42
+At C:\nvm4w\nodejs\npm.
+ps1:29 char:3
++   & $NODE_EXE 
+$NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Error: an Aft   
+ er...ort\hooks.ts:    
+42:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+    at 
+Worker.runTestRunHooks 
+(C:\Users\raymo\OneDriv
+e\Documents\Project\goo
+gle-antigravity-ide\eli
+fe-automation-engineer\
+node_modules\@cucumber\
+cucumber\src\runtime\ru
+n_test_run_hooks.ts:37:
+19)
+    at async Worker.run
+AfterAllHooks (C:\Users
+\raymo\OneDrive\Documen
+ts\Project\google-antig
+ravity-ide\elife-automa
+tion-engineer\node_modu
+les\@cucumber\cucumber\
+src\runtime\worker.ts:6
+6:5)
+    at async 
+InProcessAdapter.run (C
+:\Users\raymo\OneDrive\
+Documents\Project\googl
+e-antigravity-ide\elife
+-automation-engineer\no
+de_modules\@cucumber\cu
+cumber\src\runtime\seri
+al\adapter.ts:38:5)
+    at async 
+Coordinator.run (C:\Use
+rs\raymo\OneDrive\Docum
+ents\Project\google-ant
+igravity-ide\elife-auto
+mation-engineer\node_mo
+dules\@cucumber\cucumbe
+r\src\runtime\coordinat
+or.ts:36:21)
+    at async 
+runCucumber (C:\Users\r
+aymo\OneDrive\Documents
+\Project\google-antigra
+vity-ide\elife-automati
+on-engineer\node_module
+s\@cucumber\cucumber\sr
+c\api\run_cucumber.ts:1
+57:19)
+    at async Cli.run (C
+:\Users\raymo\OneDrive\
+Documents\Project\googl
+e-antigravity-ide\elife
+-automation-engineer\no
+de_modules\@cucumber\cu
+cumber\src\cli\index.ts
+:79:25)
+    at async 
+Object.run [as 
+default] (C:\Users\raym
+o\OneDrive\Documents\Pr
+oject\google-antigravit
+y-ide\elife-automation-
+engineer\node_modules\@
+cucumber\cucumber\src\c
+li\run.ts:32:14) {
+  [cause]: Error: 
+function timed out, 
+ensure the promise 
+resolves within 60000 
+milliseconds
+      at 
+Timeout.<anonymous> (C:
+\Users\raymo\OneDrive\D
+ocuments\Project\google
+-antigravity-ide\elife-
+automation-engineer\nod
+e_modules\@cucumber\cuc
+umber\src\time.ts:52:14
+)
+      at listOnTimeout 
+(node:internal/timers:5
+88:17)
+      at processTimers 
+(node:internal/timers:5
+23:7)
+}

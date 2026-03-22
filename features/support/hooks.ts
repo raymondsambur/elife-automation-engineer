@@ -39,7 +39,7 @@ After(async function (this: PlaywrightWorld, { result, pickle }: ITestCaseHookPa
   pendingResults.push({ atcNumber, status, errorMessage });
 });
 
-AfterAll(async function () {
+AfterAll({ timeout: 5 * 60 * 1000 }, async function () {
   // ── Flush all collected results to Notion in one batch ──
   try {
     await updateAllTestResults(pendingResults);
